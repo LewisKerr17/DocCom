@@ -1,18 +1,25 @@
 import { createServer } from "http"
 import { Server } from "socket.io"
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const httpServer = createServer()
+const app = express();
+const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
     cors: {
-        origin:
-            process.env.NODE_ENV === "production"
-                ? "*"
-                : ["http://localhost:5500", "http://127.0.0.1:5500"],
+        origin: "*",
         methods: ["GET", "POST"],
         credentials: true,
     },
 });
+//frontend
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "app")));
+
+
 // Socket io shi
 io.on('connection', socket => {
 
