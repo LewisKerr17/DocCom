@@ -17,7 +17,7 @@ const io = new Server(httpServer, {
 //frontend
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "app")));
+app.use(express.static(path.join(__dirname, "..", "app")));
 
 
 // Socket io shi
