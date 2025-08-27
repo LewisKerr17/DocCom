@@ -12,15 +12,21 @@ const io = new Server(httpServer, {
         credentials: true
     }
 })
-
 // Socket io shi
 io.on('connection', socket => {
-    console.log(`User ${socket.id} connected`)
+
+    socket.on('set-username', username => {
+        socket.username = username;
+        console.log(`Username for ${socket.id}: ${username}`);
+        socket.broadcast.emit('message', `${username} connected`);
+        socket.emit('message', `You (${username}) connected`);
+    });
 
     socket.on('message', data => {
-        console.log(`${socket.id.substring(0,5)}: ${data}`)
-        io.emit('message', `${socket.id.substring(0,5)}: ${data}`)   /* echo msg back to every user in server with first 5 characters of the socket id */
-    })
-})
+        const name = socket.username || socket.id.substring(0,5);
+        console.log(`${name}: ${data}`);
+        io.emit('message', `${name}: ${data}`);
+    });
+});
 
 httpServer.listen(3500, () => console.log('listening on port 3500'))

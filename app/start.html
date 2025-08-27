@@ -3,36 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocCom</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Home page</title>
+<link rel="stylesheet" href="main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js" integrity="sha512-8ExARjWWkIllMlNzVg7JKq9RKWPlJABQUNq6YvAjE/HobctjH/NA+bSiDMDvouBVjp4Wwnf1VP1OEv7Zgjtuxw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="app.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    
     <div class="top-bar">
             <img class="main-logo" src="DocCom logo.png">
             <h1 class="title">DocCom</h1>
     </div>
     <div class="top-bar-bottom">
         <div class="top-bar-bottom-links">
-            <a href="start.html"><button>Change name</button></a>
         </div>
     </div>
-    <div class="text-display">
-    <ul></ul>
-    </div>
-<div class="chat-bar">
-    <form>
-        <input id="message-input" type="text" placeholder="Your message" autocomplete="off">
-        <button id="send-button">Send</button>
-    </form>
-</div>
-        
-    </form>
 
+
+    <form action="index.html" method="get">
+        <input id="username" name="username" type="text" placeholder="Name" autocomplete="off" style="width:50%;">
+        <button id="send-button" type="submit">Enter</button>
+    </form>
 </body>
 </html>
