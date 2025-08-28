@@ -7,6 +7,9 @@ import { fileURLToPath } from "url";
 const app = express();
 const httpServer = createServer(app);
 
+let last = null;
+
+
 const io = new Server(httpServer, {
     cors: {
         origin: "*",
@@ -33,7 +36,18 @@ io.on('connection', socket => {
     socket.on('message', data => {
         const name = socket.username || socket.id.substring(0,5);
         console.log(`${name}: ${data}`);
-        io.emit('message', `${name}: ${data}`);
+        const users = [];
+        for (const [id, s] of io.of("/").sockets) {
+            users.push(s.username || id.substring(0, 5));
+        }
+        io.emit('users', users);
+        
+        if (last === name) {
+            io.emit('message', `${data}`);
+        } else {
+            io.emit('message', `<strong>${name}:</strong> ${data}`);
+            last = name;
+        }
     });
 
     socket.on("disconnect", () => {

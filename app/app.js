@@ -12,14 +12,6 @@ function sendMessage(e) {
 
 /* Listen for messages */
 
-socket.on('message', (data) => {
-    const li = document.createElement('li')
-    li.textContent = data /* Message from server */
-    document.querySelector('ul').appendChild(li)
-    scrollToBottom();
-})
-
-
 function scrollToBottom() {
     const textDisplay = document.querySelector('.text-display');
     if (textDisplay) {
@@ -28,12 +20,30 @@ function scrollToBottom() {
 }
 
 
+socket.on('message', (data) => {
+    const li = document.createElement('li')
+    li.innerHTML = data
+    document.querySelector('ul').appendChild(li)
+    scrollToBottom();
+})
+
+
 const params = new URLSearchParams(window.location.search);
 const username = params.get('username');
 if (username) {
     socket.emit('set-username', username);
 }
-
+socket.on('users', (users) => {
+    const usersList = document.getElementById('users-list');
+    if (usersList) {
+        usersList.innerHTML = '';
+        users.forEach(user => {
+            const userItem = document.createElement('li');
+            userItem.textContent = user;
+            usersList.appendChild(userItem);
+        });
+    }
+});
 if (document.querySelector('.chat-bar')) {
     document.querySelector('form')
         .addEventListener('submit', sendMessage);

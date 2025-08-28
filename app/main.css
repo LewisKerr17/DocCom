@@ -63,12 +63,31 @@
 .text-display {
     color: white;
     background-color: rgb(0, 0, 0);
-    height: 677px;
-    max-height: 677px;
+    height: 400px;
+    max-height: 400px;
     width: 100%;
     font-family: "Poppins", sans-serif;
     justify-content: center;
     align-items: center;
     overflow-y: auto;
     scroll-behavior: smooth;
+}
+
+ul {
+    list-style: none;
+}
+
+.server-list {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #f4f4f4;
+    color: black;
+    padding: 10px;
+    margin: 0;
+    border-radius: 5px 0 0 5px;
+    width: 200px;
+    height: 100vh;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.08);
+    z-index: 1000;
 }
