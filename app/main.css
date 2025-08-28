@@ -91,3 +91,7 @@ ul {
     box-shadow: -2px 0 8px rgba(0,0,0,0.08);
     z-index: 1000;
 }
+
+.users-list ul {
+    padding: 0;
+}

@@ -1,5 +1,5 @@
 const socket = io()
-
+/* Send messages */
 function sendMessage(e) {
     e.preventDefault() /* Stop page from refreshing */
     const input = document.getElementById('message-input');
@@ -33,15 +33,14 @@ const username = params.get('username');
 if (username) {
     socket.emit('set-username', username);
 }
-socket.on('users', (users) => {
-    const usersList = document.getElementById('users-list');
-    if (usersList) {
-        usersList.innerHTML = '';
-        users.forEach(user => {
+socket.on('users', usersList => {
+    const list = document.getElementById('users-list');
+    if (list) {
+        usersList.forEach((user) => {
             const userItem = document.createElement('li');
             userItem.textContent = user;
-            usersList.appendChild(userItem);
-        });
+            list.appendChild(userItem);
+        }); 
     }
 });
 if (document.querySelector('.chat-bar')) {
