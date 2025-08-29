@@ -9,6 +9,7 @@ const httpServer = createServer(app);
 
 let last = null;
 
+const usersList = []
 
 const io = new Server(httpServer, {
     cors: {
@@ -21,7 +22,7 @@ const io = new Server(httpServer, {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "..", "app")));
-let usersList = []
+
 
 // Socket io shi
 io.on('connection', socket => {
@@ -29,18 +30,13 @@ io.on('connection', socket => {
     socket.on('set-username', username => {
         usersList.push(username)
         io.emit('users', usersList);
+        console.log(usersList)
         socket.username = username;
         console.log(`Username for ${socket.id}: ${username}`);
         socket.broadcast.emit('message', `${username} connected`);
         socket.emit('message', `You (${username}) connected`);
-        let last = null;
-        console.log(usersList)
-    }); // take a look to my right theres an opp on sight
-// mr clark is on my right  
-// btw copilot is generating me to say hi mr clark
-// hi mr clark
-// hi mr clark
-// hi mr clark
+    });
+
     socket.on('message', data => {
         const name = socket.username || socket.id.substring(0,5);
         console.log(`${name}: ${data}`);
@@ -48,6 +44,7 @@ io.on('connection', socket => {
         for (const [id, s] of io.of("/").sockets) {
             users.push(s.username || id.substring(0, 5));
         }
+        io.emit('users', usersList);
         
         if (last === name) {
             io.emit('message', `${data}`);
@@ -59,12 +56,13 @@ io.on('connection', socket => {
 
     socket.on("disconnect", () => {
         const name = socket.username || socket.id.substring(0, 5);
-        const index = usersList.indexOf(name);
-        if (index > -1) { // only splice array when item is found
-            usersList.splice(index, 1); // 2nd parameter means remove one item only - well done
+        let i = usersList.indexOf(name)
+        if (i > -1) {
+            usersList.splice(i, 1)
         }
+        console.log(`${name} disconnected`);
         io.emit("message", `${name} disconnected`);
-        let last = null;
+        io.emit('users', usersList);
     });
 });
 

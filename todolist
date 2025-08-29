@@ -1,0 +1,13 @@
+1. add servers/accounts
+2. add a make account/log in option on start.html
+- on signup show new ID
+- store accounts in accounts.csv
+- allow user to pick username (can change whenever)
+3. add "public server"
+- public server may not need to require an account
+4. add a feature to start up a server in index.html
+-anyone in server can add to the allowed Ids
+-certain messages can be saved
+5. add list of servers you are in
+6. add dms
+7. add image sharing

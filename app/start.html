@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
-<link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css">
+    <script defer src="app.js"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js" integrity="sha512-8ExARjWWkIllMlNzVg7JKq9RKWPlJABQUNq6YvAjE/HobctjH/NA+bSiDMDvouBVjp4Wwnf1VP1OEv7Zgjtuxw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,9 +22,33 @@
     </div>
 
 
-    <form action="index.html" method="get">
-        <input id="username" name="username" type="text" placeholder="Name" autocomplete="off" style="width:50%;">
-        <button id="send-button" type="submit">Enter</button>
-    </form>
+    <div class="login">
+        <div class="sign-up">
+            <h1>For Guests:</h1>
+            <form action="index.html" method="get">
+                <input id="username" name="username" type="text" placeholder="Name" autocomplete="off" style="width:50%;">
+                <button id="send-button" type="submit">Submit</button>
+            </form>
+            <h1>Sign Up</h1>
+            <form>
+                <input class="message-input" type="text" placeholder="Your Name">
+                <button id="send-button">Sign Up</button>
+            </form>
+            <br>
+            <h1>Log In</h1>
+            <form>
+                <input class="message-input" type="text" placeholder="Your Name">
+                <button id="send-button">Log In</button>
+                <br>
+                <h3>Forgot name? Enter the first 5 characters of your ID below to Log In.</h3>
+                <input class="message-input" type="text" placeholder="ID">
+                <button id="send-button">Log In</button>
+                <br><br>
+                <button>HELP!</button>
+            </form>
+        </div>
+    </div>
+
+
 </body>
 </html>
